@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03_数据绑定</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    单向数据绑定：<input type="text" :value="name"><br />
+    <!-- v-model只能应用于表单类元素上，v-model:value可以简写为v-model -->
+    <!-- 因为v-model获取的就是元素本身的value -->
+    双向数据绑定：<input type="text" v-model:value="name">
+    双向数据绑定：<input type="text" v-model="name">
+  </div>
+  <script>
+    new Vue({
+      el:'#root',
+      data:{
+        name:'anlikun'
+      }
+    })
+  </script>
+</body>
+</html>
