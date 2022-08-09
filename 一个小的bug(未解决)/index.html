@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一个小的bug？</title>
+  <script src="../js/jquery.min.js"></script>
+</head>
+<body>
+  <div id="root">
+    <select name="" id="prov">
+    </select>
+    <select name="" id="city">
+    </select>
+  </div>
+  <script>
+    const arr = ['湖南省', '广东省', '北京市'];
+    let str = '<option value="全国">全国</option>';
+    arr.forEach((value, index) => {
+      str += '<option value=' + value + '>' + value + '</option>'
+    })
+    $('#prov').html(str);
+    $('#prov').change(function () {
+      console.log('换了省份');
+      provName = this.value;
+      console.log(provName);
+      getAllCity(provName)
+    })
+    function getAllCity(provName) {
+      console.log('渲染相关城市');
+      const cityArr = ['广州市', '珠海市', '阳江市'];
+      let cityStr = '';
+      cityArr.forEach((value, index) => {
+        cityStr += '<option value=' + value + '>' + value + '</option>'
+      })
+      $('#city').html(cityStr);
+      $('#city').change(function () {
+        console.log('换城市');
+        cityName = this.value;
+        console.log(provName);
+      })
+    }
+  </script>
+</body>
+</html>
