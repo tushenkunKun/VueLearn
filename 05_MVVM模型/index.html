@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05_MVVM模型</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <p>{{name}}</p>
+    <!-- data中的所有属性都出现在vm上，而vm上的所有属性在模版中可以直接用 -->
+    <p>{{$options}}</p>
+    <!-- vue原型上的所有属性在模版中可以直接用 -->
+    <p>{{$emit}}</p>
+  </div>
+  <script>
+    const vm = new Vue({
+      data(){
+        return {
+          name:'anlikun'
+        }
+      }
+    })
+    vm.$mount('#root');
+  </script>
+</body>
+</html>
