@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.Object.defineProperty方法</title>
+</head>
+<body>
+  <script>
+    let person = {
+      name:'anlikun',
+      sex:'male',
+      // age:20
+    }
+    // Object.defineProperty(对象,想要添加的属性,配置对象) 
+    Object.defineProperty(person,'age',{
+      value:18, // 不可枚举, 不可修改, 不可删除
+      enumerable:true, // 控制属性是否可以枚举, 默认false
+      writable:true, // 控制属性是否可以修改, 默认false
+      configurable:true // 控制属性是否可以被删除, 默认false
+    })
+    console.log(Object.keys(person));
+    console.log(person);
+  </script>
+</body>
+</html>
