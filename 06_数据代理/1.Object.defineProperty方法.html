@@ -8,6 +8,8 @@
 </head>
 <body>
   <script>
+    // 让下面的number和person中的age属性绑定, 需要借助Object.defineProperty中的get和set
+    let number = 20;
     let person = {
       name:'anlikun',
       sex:'male',
@@ -15,10 +17,20 @@
     }
     // Object.defineProperty(对象,想要添加的属性,配置对象) 
     Object.defineProperty(person,'age',{
-      value:18, // 不可枚举, 不可修改, 不可删除
+      /* value:18, // 不可枚举, 不可修改, 不可被删除
       enumerable:true, // 控制属性是否可以枚举, 默认false
       writable:true, // 控制属性是否可以修改, 默认false
-      configurable:true // 控制属性是否可以被删除, 默认false
+      configurable:true, // 控制属性是否可以被删除, 默认false */
+
+      // 当读取person中的age属性时, 调用get函数, 返回值就是age的值
+      get(){
+        console.log('有人读取person中的age');
+        return number;
+      },
+      set(value){
+        console.log('有人修改person中的age');
+        number = value;
+      }
     })
     console.log(Object.keys(person));
     console.log(person);
