@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.事件修饰符</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h2>欢迎来到{{name}}的世界</h2>
+    <!-- 阻止默认事件 -->
+    <a href="https://www.baidu.com" @click.prevent='showInfo'>点我提示信息</a>
+  </div>
+  <script>
+    const vm = new Vue({
+      el:'#root',
+      data(){
+        return {
+          name:'anlikun',
+        }
+      },
+      methods:{
+        showInfo(){
+          alert('hello')
+        },
+      }
+    })
+</script>
+</body>
+</html>
