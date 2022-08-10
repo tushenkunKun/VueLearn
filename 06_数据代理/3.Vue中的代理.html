@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.Vue中的代理</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h2>{{name}}</h2>
+    <h2>{{age}}</h2>
+  </div>
+  <script>
+    const vm = new Vue({
+      el:'#root',
+      data(){
+        return {
+          name:'anlikun',
+          age:18
+        }
+      }
+    })
+    console.log(vm);
+    // 创建实例时, vm拿到data中的内容, 放在了自己的_data属性中,
+    // 然后通过数据代理放在vm上, 将data中的属性转换成vm的属性, 同时指定一个getter/setter
+    // 方便使用
+</script>
+</body>
+</html>
