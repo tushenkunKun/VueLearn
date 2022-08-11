@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2.事件修饰符</title>
   <script src="../js/vue.js"></script>
+  <style>
+    *{margin-top: 20px;}
+  </style>
 </head>
 <body>
   <div id="root">
@@ -19,7 +22,18 @@
     <!-- 事件只会触发一次 -->
     <button @click.once="showInfo">事件只会触发一次</button>
     <!-- 使用事件的捕获模式 -->
-    <div class="box"></div>
+    <div class="box1" @click.capture="showMsg(1)" style="height: 50px;padding: 5px;background-color: skyblue;">
+      box1
+      <div class="box2" @click="showMsg(2)" style="height: 20px;background-color: slategray;">
+        box2
+      </div>
+    </div>
+    <!-- 只有event.target是当前操作的元素时, 才会触发事件 -->
+    <div class="demo" @click.self="showInfo" style="height: 50px;background-color: skyblue;">
+      <button @click="showInfo">点击提示</button>
+    </div>
+    <!-- 事件的默认行为立即执行, 无需等待事件回调执行完毕 -->
+    <!-- @wheel.passive="demo" 当滚轮滚动时滚动条立即滚动, 无需等待demo函数执行完毕 -->
   </div>
   <script>
     const vm = new Vue({
@@ -32,6 +46,9 @@
       methods:{
         showInfo(){
           alert('hello')
+        },
+        showMsg(msg){
+          console.log(msg);
         },
       }
     })
