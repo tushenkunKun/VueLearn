@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.天气案例-watch实现</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h2>今天天气很{{info}}</h2>
+    <button @click='changeWeather'>切换天气</button>
+  </div>
+  <script>
+    const vm = new Vue({
+      el:'#root',
+      data(){
+        return {
+          isHot:true
+        }
+      },
+      computed:{
+        info(){
+          return this.isHot ? '炎热' : '凉爽'
+        }
+      },
+      methods: {
+        changeWeather(){
+          this.isHot = !this.isHot
+        }
+      },
+      /* 第一种写法, 在vue实例中写监视 */
+      /* watch:{
+        isHot:{
+          immediate:true, // 初始化时就触发handler函数, 默认为false
+          // handler函数什么时候被调用? 当isHot发生改变时
+          handler(newValue, oldValue){
+            console.log('天气被修改',newValue, oldValue);
+          }
+        }
+      } */
+    })
+    /* 第二种写法, 在vue实例外部写监视 */
+    vm.$watch('isHot', {
+        immediate: true, // 初始化时就触发handler函数, 默认为false
+        // handler函数什么时候被调用? 当isHot发生改变时
+        handler(newValue, oldValue) {
+          console.log('天气被修改', newValue, oldValue);
+        }
+      })
+</script>
+</body>
+</html>
