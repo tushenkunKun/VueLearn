@@ -28,8 +28,19 @@
       },
       computed:{
         fullName:{
+          // 与数据代理的Object.defineProperty方法相同, 读取fullname时触发get函数, 返回fullName的值
+          // get什么时候被调用: 1. 初次被读取fullName; 2. fullName所依赖的数据发生变化时
           get(){
-            return 
+            console.log('fullname被读取');
+            return this.firstName+'-'+this.lastName
+          },
+          // 如果计算属性需要被修改, 那一定要写set函数, 且要去响应修改, 如下代码, 更改了firstName和lastName
+          // set什么时候被调用: 当fullName被修改时
+          set(value){
+            console.log('fullname被修改成', value);
+            const arr = value.split('-');
+            this.firstName = arr[0];
+            this.lastName = arr[1];
           }
         }
       }
