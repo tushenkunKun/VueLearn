@@ -27,7 +27,8 @@
         }
       },
       computed:{
-        fullName:{
+        /* 计算属性的完整写法 */
+        /* fullName:{
           // 与数据代理的Object.defineProperty方法相同, 读取fullname时触发get函数, 返回fullName的值
           // get什么时候被调用: 1. 初次被读取fullName; 2. fullName所依赖的数据发生变化时
           get(){
@@ -42,6 +43,11 @@
             this.firstName = arr[0];
             this.lastName = arr[1];
           }
+        } */
+        /* 计算属性的简写, 只有当计算属性确定不会被修改时使用 */
+        fullName() {
+          console.log('fullname被读取');
+          return this.firstName + '-' + this.lastName
         }
       }
     })
