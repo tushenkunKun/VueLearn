@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.名字案例_watch实现与computed区别</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div>
+      姓: <input type="text" v-model='firstName'>
+    </div>
+    <div>
+      名: <input type="text" v-model='lastName'>
+    </div>
+    全名: {{fullName}}
+  </div>
+  <script>
+    // 1. 所有被Vue管理的函数, 最好写成普通函数, 防止this指向windows
+    // 2. 所有写在Vue里但不被Vue管理的函数(定时器, ajax回调函数,promise的回调函数等), 最好写成箭头函数, 才能将this指向vm或组件实例对象
+    const vm = new Vue({
+      el:'#root',
+      data(){
+        return {
+          firstName:'an',
+          lastName:'likun',
+          fullName:'',
+        }
+      },
+      watch:{
+        // watch可以进行异步操作
+        firstName(val){
+          setTimeout(() => {
+            this.fullName = val +'-'+this.lastName
+          }, 1000);
+        },
+        lastName(val){
+          this.fullName = this.firstName +'-'+val
+        }
+      }
+    })
+</script>
+</body>
+</html>
