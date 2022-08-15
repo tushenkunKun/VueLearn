@@ -4,19 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3.天气案例-深度监视</title>
+  <title>4.天气案例-深度监视简写</title>
   <script src="../js/vue.js"></script>
 </head>
 <body>
   <div id="root">
     <h2>今天天气很{{info}}</h2>
     <button @click='changeWeather'>切换天气</button>
-    <hr>
-    <h2>a的值是:{{numbers.a}}</h2>
-    <button @click='numbers.a++'>点击加1</button>
-    <hr>
-    <h2>b的值是:{{numbers.b}}</h2>
-    <button @click='numbers.b++'>点击加1</button>
   </div>
   <script>
     const vm = new Vue({
@@ -24,10 +18,6 @@
       data(){
         return {
           isHot:true,
-          numbers:{
-            a:1,
-            b:1
-          }
         }
       },
       computed:{
@@ -41,25 +31,18 @@
         }
       },
       watch:{
-        isHot:{
+        // 完整写法
+        /* isHot:{
           immediate:true, // 初始化时就触发handler函数, 默认为false
+          deep:true, // 深度监视
           // handler函数什么时候被调用? 当isHot发生改变时
           handler(newValue, oldValue){
             console.log('天气被修改',newValue, oldValue);
           }
-        },
-        // 监视多级结构中某个属性的变化
-        'numbers.a':{
-          handler(){
-            console.log('a被改变');
-          }
-        },
-        // 监视多极结构中所有属性的变化, watch默认不监测对象内部值的改变, 需要加deep
-        'numbers':{
-          deep:true,
-          handler(){
-            console.log('numbers中的值发生改变');
-          }
+        }, */
+        // 简写, 只需要handler, 不需要其他配置项时简写, 和computed类似
+        isHot(newValue,oldValue){
+          console.log('天气被修改',newValue, oldValue);
         }
       }
     })
