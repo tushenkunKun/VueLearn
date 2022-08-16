@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.列表渲染</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <!-- key的原理中使用了Diff算法, 对比虚拟DOM中的差异, 进行节点的复用和增删 -->
+    <button @click="add">点击增添一人</button>
+    <!-- key的值使用index, 会出现输入框内的数据错位的问题 -->
+    <ul>
+      <li v-for="(hero,index) in heros" :key="index">
+        {{hero.name}}-{{hero.age}}-{{index}}
+        <input type="text">
+      </li>
+    </ul>
+
+    <!-- key的值使用数据的id, 没问题 -->
+    <ul>
+      <li v-for="(hero,index) in heros" :key="hero.id">
+        {{hero.name}}-{{hero.age}}-{{index}}
+        <input type="text">
+      </li>
+    </ul>
+  </div>
+  <script>
+    new Vue({
+      el: '#root',
+      data: {
+        heros: [
+          { id: '1', name: '轮子妈', age: 18 },
+          { id: '2', name: '金克丝', age: 19 },
+          { id: '3', name: '布隆', age: 20 },
+        ]
+      },
+      methods: {
+        add(){
+          const myHero = { id: '4', name: '瑞兹', age: 21 };
+          this.heros.unshift(myHero)
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

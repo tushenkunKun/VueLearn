@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.列表过滤</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <input type="text" placeholder="请输入名字" v-model="keyWord">
+    <ul>
+      <li v-for="(person,index) in filterPersons" :key="index">
+        {{person.name}}-{{person.age}}-{{index}}
+      </li>
+    </ul>
+  </div>
+  <script>
+    new Vue({
+      el: '#root',
+      data: {
+        keyWord: '',
+        persons: [
+          { id: '1', name: '马冬梅', age: 18, sex: '女' },
+          { id: '2', name: '周冬雨', age: 19, sex: '女' },
+          { id: '3', name: '周杰伦', age: 20, sex: '男' },
+          { id: '4', name: '温兆伦', age: 21, sex: '男' },
+        ],
+        filterPersons:[]
+      },
+      // watch实现
+      watch: {
+        keyWord:{
+          immediate:true,
+          handler(value) {
+            this.filterPersons = this.persons.filter((person) => {
+              return person.name.includes(value);
+            })
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
