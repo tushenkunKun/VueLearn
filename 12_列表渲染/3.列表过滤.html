@@ -19,7 +19,9 @@
     </ul>
   </div>
   <script>
-    new Vue({
+    // watch实现
+    //#region
+    /* new Vue({
       el: '#root',
       data: {
         keyWord: '',
@@ -31,7 +33,6 @@
         ],
         filterPersons:[]
       },
-      // watch实现
       watch: {
         keyWord:{
           immediate:true,
@@ -42,7 +43,28 @@
           }
         }
       }
-    })
+    }) */
+    //#endregion
+    // conputed实现
+    new Vue({
+      el: '#root',
+      data: {
+        keyWord: '',
+        persons: [
+          { id: '1', name: '马冬梅', age: 18, sex: '女' },
+          { id: '2', name: '周冬雨', age: 19, sex: '女' },
+          { id: '3', name: '周杰伦', age: 20, sex: '男' },
+          { id: '4', name: '温兆伦', age: 21, sex: '男' },
+        ],
+      },
+      computed:{
+        filterPersons(){
+          return this.persons.filter((person)=>{
+            return person.name.includes(this.keyWord)
+          })
+        }
+      }
+    }) 
   </script>
 </body>
 

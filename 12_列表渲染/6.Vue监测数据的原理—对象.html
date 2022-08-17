@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6.Vue监测数据的原理—对象</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <script>
+    let data = {
+      name:'anlikun',
+      age:20
+    };
+    // 2. 创建该类的实例对象, 
+    const obs = new Observer(data)
+    console.log(obs);
+    // 6. 准备一个vm实例对象
+    let vm = {};
+    vm._data = data = obs;
+    // 1. 创建一个用于监视的类
+    function Observer(data) {
+      // 3. 汇总对象中的所有属性, 形成一个数组
+      const keys = Object.keys(data);
+      // 4. 遍历这个数组
+      keys.forEach((key)=>{
+        // 5. 把数组中的每一项通过数据代理的方式添加到所创建的每一个实例中
+        Object.defineProperty(this,key,{
+          get(){
+            return data[key]
+          },
+          set(value){
+            console.log(`${data[key]}被修改成${value}`);
+            data[key] = value;
+          }
+        })
+      })
+    }
+  </script>
+</body>
+
+</html>
