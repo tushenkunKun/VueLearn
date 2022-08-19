@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8.Vue监测数据的原理—数组</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 
+    Vue监测数组原理: 通过包裹数组更新元素的方法实现, 本质上两步走:
+      1. 调用原生对应的方法对数组进行更新
+      2. 重新解析模版, 更新页面 
+   -->
+  <div id="root">
+    <h2>姓名: {{name}}</h2>
+    <h2>性别: {{sex}}</h2>
+    <h2>年龄: 虚岁:{{age.rAge}}---周岁:{{age.sAge}}</h2>
+    <hr>
+    <button @click="addHobby">添加爱好</button>
+    <h2>朋友们:</h2>
+    <ul>
+      <li v-for='(item, index) in friends' :key="item.id">
+        姓名:{{item.name}}--年龄:{{item.age}}
+        <span v-if="item.sex">--性别:{{item.sex}}</span>
+      </li>
+    </ul>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '#root',
+      data() {
+        return {
+          name: 'anlikun',
+          sex: 'male',
+          age: {
+            rAge: 24,
+            sAge: 20
+          },
+          friends: [
+            { id: 1, name: 'baixixu', age: 30 },
+            { id: 2, name: 'chaiyuanyuan', age: 31 },
+          ]
+        }
+      },
+      methods: {
+        addHobby(){
+          /* Vue监测数组变化的时候只会监测能使原数组发生改变的方法, 如pop, push等
+          这些函数是被Vue包装后的, 与数组原型上的方法本身有些不同 */
+          // 第一种写法, 使用函数的方法
+          // this.friends.push({ id: 3, name: 'liangzhihui', age: 32 })
+          // 第二种写法, 使用Vue自带的api
+          Vue.set(this.friends,2,{ id: 3, name: 'liangzhihui', age: 32 })
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

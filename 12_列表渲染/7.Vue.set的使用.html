@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7.Vue.set的使用</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <h2>姓名: {{name}}</h2>
+    <h2>性别: {{sex}}</h2>
+    <h2>年龄: 虚岁:{{age.rAge}}---周岁:{{age.sAge}}</h2>
+    <hr>
+    <button @click="addSex">添加性别</button>
+    <h2>朋友们:</h2>
+    <ul>
+      <li v-for='(item, index) in friends' :key="item.id">
+        姓名:{{item.name}}--年龄:{{item.age}}
+        <span v-if="item.sex">--性别:{{item.sex}}</span></li>
+    </ul>
+  </div>
+  <script>
+    /**
+     * Vue监测对象数据的原理:
+     * 通过setter和getter监测
+     * 如果需要给对象中后添加的属性做响应时式, 需要用到Vue.set()或vm.$set()
+    */
+    const vm = new Vue({
+      el: '#root',
+      data() {
+        return {
+          name: 'anlikun',
+          sex: 'male',
+          age: {
+            rAge: 24,
+            sAge: 20
+          },
+          friends: [
+            { id: 1, name: 'baixixu', age: 30 },
+            { id: 2, name: 'chaiyuanyuan', age: 31 },
+          ]
+        }
+      },
+      methods: {
+        addSex(){
+          this.friends.forEach(element => {
+            /* Vue.set的第一个参数不能是Vue实例(即vm)和根数据对象data, (除非使用它修改已有属性的属性值)
+            只能是根数据对象中的数据 */
+            // 第一种写法
+            // Vue.set(element,'sex','女');
+            // 第二种写法
+            vm.$set(element,'sex','女');
+          });
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
