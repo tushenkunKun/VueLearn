@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>15_Vue的内置指令</title>
+  <script src="../js/vue.js"></script>
+  <style>
+    /* 带有v-cloak属性的标签隐藏 */
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    1. v-text=""
+    2. v-html=""
+    3. v-cloak  让未经解析的模版不显示在页面上, js被阻塞时, v-cloak会被渲染, 直到不被阻塞后, v-cloak被删除
+    4. v-once  所在节点初次动态渲染后变为静态节点, 数据更新不会引起节点的更新
+    5. v-pre  跳过所在节点的编译过程, 用来跳过没使用指令语法, 没有使用插值语法的节点, 提升性能
+   -->
+  <div id="root">
+    <h3>{{time}}</h3>
+    <h3 v-text="time"></h3>
+    <div v-html="str"></div>
+    <h3 v-cloak>{{time}}</h3>
+    <h3 v-once>初始time为:{{time}}</h3>
+    <button @click="time++">点击+1</button>
+    <h3 v-pre>初始number为:{{number}}</h3>
+  </div>
+  <script>
+    new Vue({
+      el:'#root',
+      data() {
+        return {
+          number:1,
+          time:1661147423429,
+          str:'<button @click="time++">点击跳转</button>'
+        }
+      },
+    })
+  </script>
+</body>
+</html>
