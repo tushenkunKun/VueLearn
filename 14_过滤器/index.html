@@ -21,6 +21,10 @@
     <h3>现在是: {{time | timeFormater('YYYY MM DD') | mySlice}}</h3>
   </div>
   <script>
+    // 2. 全局过滤器, 一次只能写一个
+    Vue.filter('mySlice',function (value) {
+      return value.slice(0,4)
+    })
     new Vue({
       el:'#root',
       data() {
@@ -43,9 +47,9 @@
         timeFormater(value, str='YYYY-MM-DD--HH:mm:ss'){
           return dayjs(value).format(str)
         },
-        mySlice(value){
-          return value.slice(0,4,'hell')
-        }
+        /* mySlice(value){
+          return value.slice(0,4)
+        } */
       }
     })
   </script>
