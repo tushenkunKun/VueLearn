@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自定义指令</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <div>{{name}}</div>
+    <h2>当前的值是: <span v-text="number"></span></h2>
+    <h2>放大: <span v-big-number="number"></span></h2>
+    <h2>放大: <span v-big="number"></span></h2>
+    <button @click="number++">点击+1</button>
+    <hr>
+    <input type="text" v-fbind:value="number">
+  </div>
+  <script>
+    /* -----------------------------------全局指令, 注意是directive */
+    Vue.directive('big', function (element, binding) {
+        console.log('自定义指令big被调用');
+        element.innerText = binding.value * 10
+      })
+
+    const vm = new Vue({
+      el: '#root',
+      data() {
+        return {
+          name: 'anlikun',
+          number: 2
+        }
+      },
+      /* -----------------------------------局部指令, 注意是directives   (有s) */
+      directives: {
+        // (函数式写法) 什么时候被调用: 1. 指令与元素绑定成功时, 2. 指令所在的模版被重新解析时(整个vue实例)
+        'big-number':function (element, binding) {
+          console.log('自定义指令big-number被调用',this); // 自定义指令中的this都指向window, 而不是vue实例对象
+          element.innerText = binding.value * 10
+        },
+        /* big(element, binding) {
+          console.log('自定义指令big被调用');
+          element.innerText = binding.value * 10
+        }, */
+        // (对象式写法) 什么时候被调用: 常用的有三种钩子, bind(绑定), inserted(插入页面), update(模版更新)
+        fbind: {
+          bind(element, binding) {
+            console.log('bind',this); // 自定义指令中的this都指向window, 而不是vue实例对象
+            element.value = binding.value * 10
+          },
+          inserted(element, binding) {
+            console.log('inserted');
+            element.focus()
+          },
+          update(element, binding) {
+            console.log('update');
+            element.value = binding.value * 10
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
