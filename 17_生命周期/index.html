@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,19 +8,62 @@
   <title>Document</title>
   <script src="../js/vue.js"></script>
 </head>
+
 <body>
   <div id="root">
-
+    <div style="width: 800px;">
+      <img src="./images/Vue生命周期1.jpg" alt="" width="100%">
+      <img src="./images/Vue生命周期2.jpg" alt="" width="100%">
+    </div>
+    <h2 :style="{opacity,backgroundColor:bgc}">欢迎你</h2>
+    <button @click='stop'>停止渐变</button>
+    <h2>{{n}}</h2>
+    <button @click='add'>点击+1</button>
   </div>
   <script>
-    new Vue({
-      el:'#root',
+    /* 暂时共4对, 8个钩子
+      1. 将要创建 beforeCreate
+      2. 创建完毕 created
+      3. 将要挂载 beforeMount
+      4. 挂载完毕 mounted (重要, 相当于常说的一开始就怎么做)
+      5. 将要更新 beforeUpdate
+      6. 更新完毕 updated
+      7. 将要销毁 beforeDestroy (重要)
+      8. 销毁完毕 destroyed
+      销毁后自定义事件会失效, 但原生DOM上的事件依然有效(演示为下面的add方法)
+     */
+    const vm = new Vue({
+      el: '#root',
       data() {
         return {
-          
+          opacity: 0.5,
+          bgc: 'orange',
+          n:1
         }
+      },
+      methods: {
+        stop(){
+          vm.$destroy()
+        },
+        add(){
+          console.log(123);
+          this.n++
+        }
+      },
+      mounted() {
+        // (常见的重要写法) mounted里的定时器赋值给this.xxx然后其他属性中就可以通过this.xxx拿到这个定时器
+        this.timer = setInterval(() => {
+          this.opacity -= 0.1;
+          if (this.opacity <= 0) {
+            this.opacity = 1
+          }
+        }, 160);
+      },
+      beforeDestroy() {
+        clearInterval(this.timer)
       },
     })
   </script>
 </body>
+
 </html>
