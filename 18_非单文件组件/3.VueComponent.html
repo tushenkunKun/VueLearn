@@ -1,0 +1,7 @@
+<!-- 
+  1. 组件本质是一个名为VueComponent的构造函数, 由Vue.extend生成, 简称vc
+  2. 既然是构造函数, 当我们使用时, Vue解析模版时会执行new VueComponent()
+  3. 每次调用Vue.extend()返回的都是一个全新的VueComponent
+  4. this的指向: (1) 组件配置中: data/methods/computed/watch中的函数, this均是VueComponent实例对象; 
+                (2) new Vue()配置中: data/methods/computed/watch中的函数, this均是Vue实例对象
+ -->
