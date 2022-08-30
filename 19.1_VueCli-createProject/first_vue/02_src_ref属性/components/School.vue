@@ -18,6 +18,9 @@ export default {
     }
   },
   methods: {
+    /* 在组件上加ref, 获取到的是对应的组件实例对象
+       在html标签上加ref, 获取到的是真实DOM元素  
+    */
     showSchoolName(value,event){
       console.log(this.name+'@@@@@'+value,event.target);
       console.log(this.$refs.schoolName);
