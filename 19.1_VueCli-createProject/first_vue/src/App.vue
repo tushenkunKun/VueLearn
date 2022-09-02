@@ -1,18 +1,49 @@
 <template>
-  <div class="app">
-    <School></School>
+  <div class="root">
+    <div class="app">
+      <MyInput></MyInput>
+      <MyList></MyList>
+      <MyResult></MyResult>
+    </div>
   </div>
 </template>
 <script>
-import School from './components/School.vue'
+import MyInput from "./components/MyInput.vue";
+import MyList from "./components/MyList.vue";
+import MyResult from "./components/MyResult.vue";
+
 export default {
   name: "App",
   components: {
-    School,
+    MyInput,
+    MyList,
+    MyResult,
   },
   data() {
     return {};
   },
 };
 </script>
-<style scoped></style>
+<style>
+* {
+  padding: 0;
+  margin: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+.root {
+  width: 100%;
+}
+.app {
+  width: 90%;
+  max-width: 600px;
+  border: 2px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+</style>
