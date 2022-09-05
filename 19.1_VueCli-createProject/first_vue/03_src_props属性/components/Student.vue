@@ -23,7 +23,7 @@ export default {
       this.myAge++
     }
   },
-  /* props中配置的数据会被绑定在组件实例对象(vc)上 */
+  /* props中配置的数据会被绑定在组件实例对象(vc)上, 且props是只读的 */
   // 只接收数据
   props:['name','age','sex']
 
