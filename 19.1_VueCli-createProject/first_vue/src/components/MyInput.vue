@@ -1,13 +1,29 @@
 <template>
   <div class="my-input">
-    <input type="text" placeholder="请输入想要添加的todoList内容" />
+    <input type="text" placeholder="请输入想要添加的todoList内容" v-model="title" @keyup.enter="confirmAdd" />
   </div>
 </template>
 <script>
+import { nanoid } from "nanoid";
 export default {
   name: "MyInput",
   data() {
-    return {};
+    return {
+      title: "",
+    };
+  },
+  props: ["addTodo"],
+  methods: {
+    confirmAdd() {
+      // 校验数据
+      if (!this.title.trim()) return alert('输入不能为空')
+      // 包装输入的数据
+      const todoObj = { id: nanoid(), title: this.title, done: false };
+      // 将数据传给父组件
+      this.addTodo(todoObj);
+      // 清空input框中的内容
+      this.title = "";
+    },
   },
 };
 </script>

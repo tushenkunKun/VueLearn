@@ -1,8 +1,8 @@
 <template>
   <div class="root">
     <div class="app">
-      <MyInput></MyInput>
-      <MyList></MyList>
+      <MyInput :addTodo="addTodo"></MyInput>
+      <MyList :todos="todos"></MyList>
       <MyResult></MyResult>
     </div>
   </div>
@@ -20,7 +20,18 @@ export default {
     MyResult,
   },
   data() {
-    return {};
+    return {
+      todos: [
+        { id: "001", title: "玩Apex", done: true },
+        { id: "002", title: "玩LOL", done: false },
+        { id: "003", title: "玩CSGO", done: false },
+      ],
+    };
+  },
+  methods: {
+    addTodo(value){
+      this.todos.unshift(value);
+    }
   },
 };
 </script>
