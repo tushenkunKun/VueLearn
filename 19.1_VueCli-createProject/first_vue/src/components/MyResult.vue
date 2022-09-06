@@ -1,7 +1,7 @@
 <template>
   <div class="my-result">
     <label for="">
-      <input type="checkbox" name="" id="" />
+      <input type="checkbox" name="" id="" :checked="allDone" />
       <span>已完成{{ doneTotal }}</span>
       <span>/</span>
       <span>全部{{ todos.length }}</span>
@@ -21,6 +21,9 @@ export default {
       return this.todos.reduce((pre, current) => {
         return pre + (current.done == true ? 1 : 0);
       }, 0);
+    },
+    allDone() {
+      return this.doneTotal === this.todos.length;
     },
   },
 };
