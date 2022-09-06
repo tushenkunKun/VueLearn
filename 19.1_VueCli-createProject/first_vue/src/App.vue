@@ -3,7 +3,7 @@
     <div class="app">
       <MyInput :addTodo="addTodo"></MyInput>
       <MyList :todos="todos" :changeDoneState="changeDoneState" :deleteTodo="deleteTodo"></MyList>
-      <MyResult></MyResult>
+      <MyResult :todos="todos"></MyResult>
     </div>
   </div>
 </template>

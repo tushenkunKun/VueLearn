@@ -2,9 +2,9 @@
   <div class="my-result">
     <label for="">
       <input type="checkbox" name="" id="" />
-      <span>已完成0</span>
+      <span>已完成{{ doneTotal }}</span>
       <span>/</span>
-      <span>全部0</span>
+      <span>全部{{ todos.length }}</span>
     </label>
     <button class="btn-delete">删除已完成目标</button>
   </div>
@@ -12,8 +12,16 @@
 <script>
 export default {
   name: "MyResult",
+  props: ["todos"],
   data() {
     return {};
+  },
+  computed: {
+    doneTotal() {
+      return this.todos.reduce((pre, current) => {
+        return pre + (current.done == true ? 1 : 0);
+      }, 0);
+    },
   },
 };
 </script>
