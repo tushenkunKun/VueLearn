@@ -2,7 +2,7 @@
   <div class="root">
     <div class="app">
       <MyInput :addTodo="addTodo"></MyInput>
-      <MyList :todos="todos" :changeDoneState="changeDoneState"></MyList>
+      <MyList :todos="todos" :changeDoneState="changeDoneState" :deleteTodo="deleteTodo"></MyList>
       <MyResult></MyResult>
     </div>
   </div>
@@ -39,6 +39,11 @@ export default {
         }
       });
     },
+    deleteTodo(id){
+      this.todos = this.todos.filter((element)=>{
+        return element.id!=id
+      })
+    }
   },
 };
 </script>

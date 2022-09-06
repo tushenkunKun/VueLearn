@@ -6,19 +6,22 @@
       <!-- <input type="checkbox" name="" id="" v-model="todo.done"/> -->
       <span>{{todo.title}}</span>
     </label>
-    <button class="btn-delete">删除</button>
+    <button class="btn-delete" @click="deleteThis(todo.id)">删除</button>
   </li>
 </template>
 <script>
 export default {
   name: "MyListItem",
-  props:['todo','changeDoneState'],
+  props:['todo','changeDoneState','deleteTodo'],
   data() {
     return {};
   },
   methods: {
     changeCheck(id){
       this.changeDoneState(id)
+    },
+    deleteThis(id){
+      this.deleteTodo(id)
     }
   },
 };
@@ -32,6 +35,12 @@ li {
   margin-bottom: 5px;
   background-color: pink;
   border-radius: 5px;
+}
+li:hover {
+  background-color: #ddd;
+}
+li:hover button {
+  display: block;
 }
 label {
   display: flex;
@@ -49,6 +58,7 @@ button {
   border-radius: 5px;
   color: red;
   font-size: 14px;
+  display: none;
 }
 button:hover {
   background-color: red;
