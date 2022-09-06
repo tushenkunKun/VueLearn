@@ -2,7 +2,7 @@
   <div class="root">
     <div class="app">
       <MyInput :addTodo="addTodo"></MyInput>
-      <MyList :todos="todos"></MyList>
+      <MyList :todos="todos" :changeDoneState="changeDoneState"></MyList>
       <MyResult></MyResult>
     </div>
   </div>
@@ -29,9 +29,16 @@ export default {
     };
   },
   methods: {
-    addTodo(value){
+    addTodo(value) {
       this.todos.unshift(value);
-    }
+    },
+    changeDoneState(id) {
+      this.todos.forEach((element) => {
+        if (element.id == id) {
+          element.done = !element.done;
+        }
+      });
+    },
   },
 };
 </script>

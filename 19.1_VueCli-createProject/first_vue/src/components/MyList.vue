@@ -1,7 +1,7 @@
 <template>
   <div class="my-list">
     <ul class="my-list-item">
-      <MyListItem v-for="todoObj in todos" :key="todoObj.id" :todo="todoObj"></MyListItem>
+      <MyListItem v-for="todoObj in todos" :key="todoObj.id" :todo="todoObj" :changeDoneState="changeDoneState"></MyListItem>
     </ul>
   </div>
 </template>
@@ -12,7 +12,7 @@ export default {
   components: {
     MyListItem,
   },
-  props:['todos']
+  props:['todos','changeDoneState']
 };
 </script>
 <style scoped>

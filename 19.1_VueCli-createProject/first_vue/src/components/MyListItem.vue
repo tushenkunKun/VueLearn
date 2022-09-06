@@ -1,7 +1,9 @@
 <template>
   <li>
     <label for="">
-      <input type="checkbox" name="" id="" :checked="todo.done"/>
+      <input type="checkbox" name="" id="" :checked="todo.done" @change="changeCheck(todo.id)"/>
+      <!-- 这种写法不推荐, 因为props是不允许被修改的, 这种写法可以实现功能, 但违背初衷 -->
+      <!-- <input type="checkbox" name="" id="" v-model="todo.done"/> -->
       <span>{{todo.title}}</span>
     </label>
     <button class="btn-delete">删除</button>
@@ -10,9 +12,14 @@
 <script>
 export default {
   name: "MyListItem",
-  props:['todo'],
+  props:['todo','changeDoneState'],
   data() {
     return {};
+  },
+  methods: {
+    changeCheck(id){
+      this.changeDoneState(id)
+    }
   },
 };
 </script>
