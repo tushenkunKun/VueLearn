@@ -10,13 +10,13 @@
       <span>/</span>
       <span>全部{{ todos.length }}</span>
     </label>
-    <button class="btn-delete">删除已完成目标</button>
+    <button class="btn-delete" @click="deleteAll">删除已完成目标</button>
   </div>
 </template>
 <script>
 export default {
   name: "MyResult",
-  props: ["todos", "checkAllTodo"],
+  props: ["todos", "checkAllTodo", "deleteAllDoneTodo"],
   data() {
     return {};
   },
@@ -43,6 +43,11 @@ export default {
       this.checkAllTodo(e.target.checked)
     }
   }, */
+  methods: {
+    deleteAll(){
+      this.deleteAllDoneTodo()
+    }
+  },
 };
 </script>
 <style scoped>

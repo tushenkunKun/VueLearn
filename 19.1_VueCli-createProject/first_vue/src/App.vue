@@ -3,7 +3,7 @@
     <div class="app">
       <MyInput :addTodo="addTodo"></MyInput>
       <MyList :todos="todos" :changeDoneState="changeDoneState" :deleteTodo="deleteTodo"></MyList>
-      <MyResult :todos="todos" :checkAllTodo="checkAllTodo"></MyResult>
+      <MyResult :todos="todos" :checkAllTodo="checkAllTodo" :deleteAllDoneTodo="deleteAllDoneTodo"></MyResult>
     </div>
   </div>
 </template>
@@ -48,6 +48,11 @@ export default {
       this.todos.forEach(element => {
         element.done = done
       });
+    },
+    deleteAllDoneTodo(){
+      this.todos = this.todos.filter((element)=>{
+        return !element.done
+      })
     }
   },
 };
