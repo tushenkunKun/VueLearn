@@ -1,7 +1,11 @@
 <template>
-  <div class="my-result">
+  <div class="my-result" v-show="todos.length">
     <label for="">
-      <input type="checkbox" name="" id="" />
+      <!-- 配合methods的写法, 比较繁琐, checkbox既要展示初始值, 又要完成交互, 应该考虑两者合一的方式 -->
+      <!-- <input type="checkbox" name="" id="" :checked="allDone" @change="allCheck"/> -->
+
+      <!-- 以下就是两者合一的方式 -->
+      <input type="checkbox" name="" id="" v-model="allDone" />
       <span>已完成{{ doneTotal }}</span>
       <span>/</span>
       <span>全部{{ todos.length }}</span>
@@ -12,7 +16,7 @@
 <script>
 export default {
   name: "MyResult",
-  props: ["todos"],
+  props: ["todos", "checkAllTodo"],
   data() {
     return {};
   },
@@ -22,7 +26,23 @@ export default {
         return pre + (current.done == true ? 1 : 0);
       }, 0);
     },
+    // 这里的计算属性可以仔细研究一下思路, 为什么要写成完整模式, 写成普通模式会显示什么报错信息
+    allDone: {
+      get() {
+        return this.doneTotal === this.todos.length && this.todos.length > 0;
+      },
+      set(value) {
+        this.checkAllTodo(value);
+      },
+    },
   },
+
+  // 配合上面的checkbox的写法
+  /* methods: {
+    allCheck(e){
+      this.checkAllTodo(e.target.checked)
+    }
+  }, */
 };
 </script>
 <style scoped>
