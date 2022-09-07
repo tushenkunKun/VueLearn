@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sessionStorage</title>
+</head>
+
+<body>
+  <h2>Session Storage</h2>
+  <button onclick="saveData()">点击添加</button>
+  <button onclick="getData()">点击获取</button>
+  <script>
+    let p = { name: 'alk', age: 10 }
+    function saveData() {
+      /* 总共四个API : setItem / getItem / removeItem / clear */
+
+      /* sessionStorage中存储的数据在浏览器关闭后会自动消失 */
+
+      sessionStorage.setItem('msg', 123); // 存成字符串
+      sessionStorage.setItem('msg1', 'alkalk');
+      // sessionStorage.setItem('msg2', p); // 直接显示[object Object], 需要用JSON.Stringify转换
+      sessionStorage.setItem('msg2', JSON.stringify(p)); 
+      sessionStorage.setItem('msg3', p);
+    }
+    function getData() {
+      const result1 = sessionStorage.getItem('msg');
+      console.log(result1);
+      const result2 = sessionStorage.getItem('msg2'); 
+      console.log(result2); // 直接显示字符串, 需要用JSON.parse转换成对象形式
+      console.log(JSON.parse(result2));
+      const result3 = sessionStorage.getItem('msg3'); 
+      console.log(result3);
+      const result4 = sessionStorage.getItem('msg4'); // 没有数据会显示null, 用JSON.parse()转换后也是null
+      console.log(result4);
+      console.log(JSON.parse(result4));
+    }
+  </script>
+</body>
+
+</html>
