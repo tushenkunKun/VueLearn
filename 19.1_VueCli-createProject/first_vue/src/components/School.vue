@@ -2,7 +2,7 @@
   <div class="school">
     <h2>{{ name }}</h2>
     <h2>{{ address }}</h2>
-    <button @click="showSchool">点击输出学校名字</button>
+    <button @click="showSchoolName">点击输出学校名字</button>
   </div>
 </template>
 <script>
@@ -14,9 +14,10 @@ export default {
       address: "beijing",
     };
   },
+  props:['getSchoolName'],
   methods: {
-    showSchool() {
-      console.log(this.name);
+    showSchoolName() {
+      this.getSchoolName(this.name)
     },
   },
 };
