@@ -5,6 +5,7 @@
   </div>
 </template>
 <script>
+import pubsub from "pubsub-js";
 export default {
   name: "School",
   data() {
@@ -13,12 +14,13 @@ export default {
       address: "beijing",
     };
   },
-  /* 给全局事件总线绑定事件, 尽量在这个组件被销毁前解绑当前组件使用到的自定义事件 */
   mounted() {
-    
+    this.pubId = pubsub.subscribe("studentName", function (msgName, data) {
+      console.log("有人发布了studentName消息,回调被执行,返回:", msgName, data);
+    });
   },
   beforeDestroy() {
-    
+    pubsub.unsubscribe(this.pubId)
   },
 };
 </script>

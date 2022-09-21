@@ -1,19 +1,96 @@
 <template>
-  <div id="alk">
-    <School></School>
-    <Student></Student>
+  <div class="root">
+    <div class="app">
+      <MyInput @addTodo="addTodo"></MyInput>
+      <MyList :todos="todos"></MyList>
+      <MyResult :todos="todos" @checkAllTodo="checkAllTodo" @deleteAllDoneTodo="deleteAllDoneTodo"></MyResult>
+    </div>
   </div>
 </template>
 <script>
-// 引入组件
-import School from "./components/School.vue";
-import Student from "./components/Student.vue";
+import MyInput from "./components/MyInput.vue";
+import MyList from "./components/MyList.vue";
+import MyResult from "./components/MyResult.vue";
+
 export default {
   name: "App",
-  data() {
-    return {};
+  components: {
+    MyInput,
+    MyList,
+    MyResult,
   },
-  components: { School, Student },
+  data() {
+    return {
+      todos: JSON.parse(localStorage.getItem("userTodo")) || [],
+    };
+  },
+  methods: {
+    addTodo(value) {
+      this.todos.unshift(value);
+    },
+    changeDoneState(id) {
+      this.todos.forEach((element) => {
+        if (element.id == id) {
+          element.done = !element.done;
+        }
+      });
+    },
+    deleteTodo(id) {
+      this.todos = this.todos.filter((element) => {
+        return element.id != id;
+      });
+    },
+    checkAllTodo(done) {
+      this.todos.forEach((element) => {
+        element.done = done;
+      });
+    },
+    deleteAllDoneTodo() {
+      this.todos = this.todos.filter((element) => {
+        return !element.done;
+      });
+    },
+  },
+  watch: {
+    todos: {
+      deep: true,
+      handler(value) {
+        localStorage.setItem("userTodo", JSON.stringify(value));
+      },
+    },
+  },
+  /* 2. 给全局事件总线绑定事件 */
+  mounted() {
+    this.$bus.$on('changeDoneState',this.changeDoneState)
+    this.$bus.$on('deleteTodo',this.deleteTodo)
+  },
+  /* 3. 给全局事件总线解绑事件 */
+  beforeDestroy () {
+    this.$bus.$off('changeDoneState')
+    this.$bus.$off('deleteTodo')
+  },
 };
 </script>
-<style scoped></style>
+<style>
+* {
+  padding: 0;
+  margin: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+.root {
+  width: 100%;
+}
+.app {
+  width: 90%;
+  max-width: 600px;
+  border: 2px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+</style>
