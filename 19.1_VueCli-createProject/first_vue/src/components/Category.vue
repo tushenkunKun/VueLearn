@@ -1,8 +1,7 @@
 <template>
   <div class="category">
     <h3>{{ title }}分类</h3>
-    <slot name="alk">这是第一个默认插槽</slot>
-    <slot name="alkalk">这是第二个默认插槽</slot>
+    <slot></slot>
   </div>
 </template>
 <script>
