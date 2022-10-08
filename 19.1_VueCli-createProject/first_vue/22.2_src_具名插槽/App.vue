@@ -19,11 +19,11 @@
         <!-- 具名插槽的第二种写法, 用 template 标签包裹所有的元素, 给 template 加 v-slot:xxx -->
         <template v-slot:alk>
           <ul>
-            <li v-for="item in foods.content" :key="item">{{ item }}</li>
+            <li v-for="item in games.content" :key="item">{{ item }}</li>
           </ul>
           <div class="gameCategory">
-            <a href="#">快餐</a>
-            <a href="#">炒饭</a>
+            <a href="#">单机游戏</a>
+            <a href="#">网络游戏</a>
           </div>
         </template>
       </Category>
