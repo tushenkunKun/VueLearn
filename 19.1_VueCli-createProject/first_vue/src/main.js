@@ -1,13 +1,14 @@
 import Vue from "vue";
-import ElementUI from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
 import App from "./App.vue";
+// 1.下载并引入 Vuex
+import Vuex from "vuex";
+import store from "./store/index"
 
-Vue.use(ElementUI);
+// 2.使用 Vuex 插件
+Vue.use(Vuex);
 
-new Vue({
+const vm = new Vue({
   render: (h) => h(App),
-  beforeCreate(){
-    Vue.prototype.$bus = this
-  }
+  store
 }).$mount("#app");
+console.log(vm);
