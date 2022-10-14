@@ -1,17 +1,17 @@
 <template>
   <div class="root">
-    <Count></Count>
-    <Person></Person>
+    <el-container>
+      <el-main>
+        <Aside></Aside>
+      </el-main>
+    </el-container>
   </div>
 </template>
 <script>
-import Count from "./components/Count.vue";
-import Person from "./components/Person.vue";
+import Aside from './components/Aside.vue'
 export default {
   name: "App",
-  components: {
-    Count,Person
-  },
+  components: {Aside},
   data() {
     return {};
   },
@@ -21,5 +21,9 @@ export default {
 * {
   padding: 0;
   margin: 0;
+}
+html,body {
+  height: 100vh;
+  width: 100vh;
 }
 </style>
