@@ -3,7 +3,7 @@
     <li v-for="person in personInfo" :key="person.id">
       <!-- 第一种写法, 模版字符串 -->
       <!-- <router-link :to="`/home/apex/detail/${person.id}/${person.name}`">{{ person.name }}</router-link> -->
-      <!-- 第二种写法, 对象写法 -->
+      <!-- 第二种写法, 对象写法: 这种写法里params 必须和name 配合使用, 不能使用 path -->
       <router-link
         :to="{
           name: 'apexgame',
