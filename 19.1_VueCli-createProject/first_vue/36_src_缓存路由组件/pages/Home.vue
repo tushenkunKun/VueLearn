@@ -6,7 +6,12 @@
       <el-menu-item><router-link to="/home/apex">APEX 英雄</router-link></el-menu-item>
     </el-menu>
     <!-- 缓存路由的写法, include 后写的是组件名称 -->
-    <keep-alive include="Lol">
+    <!-- <keep-alive include="Lol">
+      <router-view></router-view>
+    </keep-alive> -->
+    
+    <!-- 这是缓存多个组件的写法 -->
+    <keep-alive :include="['Lol','Apex']">
       <router-view></router-view>
     </keep-alive>
   </div>
