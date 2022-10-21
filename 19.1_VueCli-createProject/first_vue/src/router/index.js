@@ -7,18 +7,20 @@ import Lol from "../pages/Lol.vue";
 import Apex from "../pages/Apex.vue";
 import Detail from "../pages/Detail.vue";
 
-export default new VueRouter({
+const router = new VueRouter({
   routes: [
     {
       path: "/home",
       component: Home,
       children: [
         {
+          name:'lol',
           path: "lol",
           component: Lol,
           children: [{ path: "detail/:id/:name", component: Detail, props: true }],
         },
         {
+          name:'apex',
           path: "apex",
           component: Apex,
           children: [
@@ -26,20 +28,12 @@ export default new VueRouter({
               name: "apexgame",
               path: "detail/:id/:name",
               component: Detail,
-              /* 路由的 props 参数: 哪个组件接收东西就写到哪个组件的的路由配置项里 */
-              // 第一种写法, 只能传固定的值, 以 props 的形式传给Detail组件
-              // props: { a: 1, b: "hello", },
-
-              // 第二种写法, 只能将所有的 params 参数通过props 的形式传给Detail组件, query 参数无法获取
-              // props: true,
-
-              // 第三种写法, 既能传 params 参数, 又能穿 query 参数, 这是一个函数, 可以接收到一个参数, 这个参数是$route
-              props(route){
+              props(route) {
                 return {
                   id: route.params.id,
-                  name: route.params.name
-                }
-              }
+                  name: route.params.name,
+                };
+              },
             },
           ],
         },
@@ -51,3 +45,16 @@ export default new VueRouter({
     },
   ],
 });
+router.beforeEach((to, from, next) => {
+  console.log("@@@前置守卫");
+  if (to.name == "apex" || to.name == "lol") {
+    if (localStorage.getItem("name") == "alkalk") {
+      next();
+    } else {
+      alert("name 不正确, 没有权限查看");
+    }
+  }else {
+    next()
+  }
+});
+export default router;
