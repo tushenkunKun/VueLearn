@@ -1,9 +1,5 @@
 <template>
-  <Demo gameName="lol" msg="你好啊你好啊" @hello="sayHello">
-    <template v-slot:alk>
-      <span>我是一个 slot 插槽中的内容</span>
-    </template>
-  </Demo>
+  <Demo></Demo>
 </template>
 
 <script>
@@ -14,10 +10,7 @@ export default {
     Demo,
   },
   setup() {
-    let sayHello = (value) => {
-      console.log(`hello hello ${value}`);
-    };
-    return { sayHello };
+    return {};
   },
 };
 </script>
