@@ -10,7 +10,7 @@
 <body>
   <div id="root">
     单向数据绑定：<input type="text" :value="name"><br />
-    <!-- v-model只能应用于表单类元素上，v-model:value可以简写为v-model -->
+    <!-- v-model只能应用于表单类元素(输入元素)上，v-model:value可以简写为v-model -->
     <!-- 因为v-model获取的就是元素本身的value -->
     双向数据绑定：<input type="text" v-model:value="name">
     双向数据绑定：<input type="text" v-model="name">
