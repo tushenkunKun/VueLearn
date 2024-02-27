@@ -11,7 +11,8 @@
   <div id="root">
     <h2>欢迎来到{{name}}的世界</h2>
     <button v-on:click='showInfo'>点我提示信息</button>
-    <button @click='showInfo1(666,$event)'>点我提示信息1</button>
+    <!-- 如果既传参数又想用到event, 需要给函数内传$event -->
+    <button @click='showInfo1(666,$event,777)'>点我提示信息1</button>
   </div>
   <script>
     const vm = new Vue({
@@ -22,12 +23,14 @@
         }
       },
       methods:{
-        showInfo(){
+        showInfo(){ // 如果写成 showInfo:()=>{} 箭头函数的形式, 里面的this会变成window
+          console.log(this); // 这里的this是vm(Vue实例对象)
           alert('hello')
         },
-        showInfo1(number,event){
-          console.log(number);
+        showInfo1(number1,event, number2){
+          console.log(number1);
           console.log(event);
+          console.log(number2);
         },
       }
     })
