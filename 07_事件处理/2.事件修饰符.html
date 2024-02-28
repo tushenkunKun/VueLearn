@@ -16,8 +16,8 @@
     <!-- 阻止默认事件 -->
     <a href="https://www.baidu.com" @click.prevent='showInfo'>点我提示信息</a>
     <!-- 阻止事件冒泡 -->
-    <div class="father" @click="showInfo" style="height: 50px;background-color: skyblue;">
-      <div class="son"@click.stop="showInfo"  style="height: 20px;background-color: green;">阻止事件冒泡</div>
+    <div class="father" @click="showInfo2" style="height: 50px;background-color: skyblue;">
+      <div class="son" @click.stop="showInfo"  style="height: 20px;background-color: green;">阻止事件冒泡</div>
     </div>
     <!-- 事件只会触发一次 -->
     <button @click.once="showInfo">事件只会触发一次</button>
@@ -46,6 +46,9 @@
       methods:{
         showInfo(){
           alert('hello')
+        },
+        showInfo2(){
+          alert('hello2')
         },
         showMsg(msg){
           console.log(msg);
