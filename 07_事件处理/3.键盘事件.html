@@ -28,7 +28,9 @@
       1. 配合keyup使用时, 按下修饰按键的同时按下其他任意按键, 然后松开其他按键才能触发
       2. 配合keydown使用时, 按下修饰按键即可触发事件
      -->
-     <input type="text" placeholder="按下crtl提示输入" @keyup.ctrl="showInfo">
+     <input type="text" placeholder="按下crtl再按下其他按键,松开其他按键后提示输入" @keyup.ctrl="showInfo">
+     <!-- 系统修饰按键可以后面指定其他按键联合使用 -->
+     <input type="text" placeholder="按下crtl和y后提示输入" @keyup.ctrl.y="showInfo">
      <input type="text" placeholder="按下crtl提示输入" @keydown.ctrl="showInfo">
   </div>
   <script>
