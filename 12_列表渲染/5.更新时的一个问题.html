@@ -34,7 +34,7 @@
           /* this.persons[0].name = '马老师'; // 是有效的
           this.persons[0].age = '50'; // 是有效的
           this.persons[0].sex = '男'; // 是有效的 */
-          this.persons[0] = { id: '1', name: '马老师', age: 50, sex: '男' } // 是无效的
+          this.persons[0] = { id: '1', name: '马老师', age: 50, sex: '男' } // 是无效的, vue检测不到, 但数据确实是改了, 不会显示在页面上
         }
       },
     }) 
