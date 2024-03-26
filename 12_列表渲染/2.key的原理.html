@@ -11,9 +11,10 @@
 
 <body>
   <div id="root">
+    <!-- key 值是虚拟 DOM 对象标识 -->
     <!-- key的原理中使用了Diff算法, 对比虚拟DOM中的差异, 进行节点的复用和增删 -->
     <button @click="add">点击增添一人</button>
-    <!-- key的值使用index, 会出现输入框内的数据错位的问题 -->
+    <!-- key的值使用index且进行了逆向添加操作(正向添加没事), index 会发生变化, 会出现输入框内的数据错位的问题 -->
     <ul>
       <li v-for="(hero,index) in heros" :key="index">
         {{hero.name}}-{{hero.age}}-{{index}}
