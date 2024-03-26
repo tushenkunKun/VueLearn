@@ -41,7 +41,10 @@
             return person.name.includes(this.keyWord)
           })
           if (this.sortType) {
-            // 数组的sort排序方法会改变原数组
+            /** 数组的sort排序方法会改变原数组
+             *  arr.sort() 默认按字符编码的顺序进行排序; 
+             *  arr.sort((a,b)=>{return a-b或者b-a})  升序用a-b, 降序用b-a 
+             */
             arr.sort((p1, p2) => {
               return this.sortType === 1 ? p1.age - p2.age : p2.age - p1.age
             })
