@@ -17,6 +17,14 @@
     <ul>
       <li v-for="(value,key) of car" :key="key">{{key}}-{{value}}</li>
     </ul>
+    <!-- 遍历字符串 -->
+    <ul>
+      <li v-for="(value, index) of str" :key="index">{{index}}-{{value}}</li>
+    </ul>
+    <!-- 遍历指定次数 -->
+    <ul>
+      <li v-for="(number, index) of 6" :key="index">{{index}}-{{number}}</li>
+    </ul>
   </div>
   <script>
     new Vue({
@@ -31,7 +39,8 @@
           name:'奥迪A8',
           price:'50万',
           color:'黑色'
-        }
+        },
+        str:'helloWorld'
       }
     })
   </script>
