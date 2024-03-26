@@ -19,7 +19,13 @@
     </ul>
   </div>
   <script>
-    // watch实现
+    /**
+     * 1. arr.filter((每一项)=>{各种条件;return true/false}) 用来过滤数组,不改变原数组,返回新数组, true 留下,false 被过滤
+     * 2. arr.includes(searchElement, fromIndex)  从fromIndex开始查找存不存在searchElement, true存在
+     *    fromIndex >= arr.length时, 返回false, 不会查询; fromIndex < 0时, 按升序从 arr.length + fromIndex 的索引开始搜索;
+     *    计算出的索引仍然 < 0时, 整个数组都被搜索
+    */
+    /* watch实现 */
     //#region
     /* new Vue({
       el: '#root',
@@ -45,7 +51,9 @@
       }
     }) */
     //#endregion
-    // conputed实现
+
+
+    /* conputed实现 */
     new Vue({
       el: '#root',
       data: {
