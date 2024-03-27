@@ -17,6 +17,7 @@
     <button @click='changeName'>修改第一个朋友的名字</button>
     <button @click='addHobby'>添加爱好</button>
     <button @click='changeHobby'>修改第一个爱好为开车</button>
+    <button @click='sortFriendsByAge'>对朋友们进行年龄升序排序</button>
     <h2>姓名: {{name}}</h2>
     <h2>性别: {{sex}}</h2>
     <h2>年龄: 虚岁:{{age.rAge}}---周岁:{{age.sAge}}</h2>
@@ -52,7 +53,7 @@
           Vue.set(this.friends[0],'sex','男')
         },
         addFriends(){
-          this.friends.unshift({ id: 0, name: 'liangzhihui', age: 29 },)
+          this.friends.unshift({ id: 0, name: 'liangzhihui', age: 40 },)
         },
         changeName(){
           this.friends[0].name = 'zhangsan'
@@ -72,6 +73,11 @@
           }else{
             alert('暂无爱好, 请先添加!')
           }
+        },
+        sortFriendsByAge(){
+          this.friends.sort((a, b) => {
+            return a.age - b.age
+          })
         }
       },
     })
