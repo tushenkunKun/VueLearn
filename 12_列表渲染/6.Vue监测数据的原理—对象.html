@@ -22,7 +22,7 @@
     // 6. 准备一个vm实例对象
     let vm = {};
     vm._data = data = obs;
-    // 1. 创建一个用于监视的类
+    // 1. 创建一个用于监视的类, 用于监测 data 中属性的变化(只监测了一层对象, 真实的vue里会使用递归监测多层对象)
     function Observer(data) {
       // 3. 汇总对象中的所有属性, 形成一个数组
       const keys = Object.keys(data);
