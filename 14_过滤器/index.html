@@ -11,7 +11,9 @@
 <body>
   <div id="root">
     <h2>显示格式化后的时间</h2>
+    <!-- 计算属性 computed 实现 -->
     <h3>现在是: {{formatTime}}</h3>
+    <!-- 方法 methods 实现 -->
     <h3>现在是: {{getFormatTime()}}</h3>
     <!-- 1. 过滤器不传参的写法, 自动接收管道符前的参数作为内部的值 -->
     <h3>现在是: {{time | timeFormater}}</h3>
@@ -44,6 +46,7 @@
       },
       // 1. 局部过滤器, 可同时写多个, 只能在这个Vue实例中使用
       filters:{
+        /* 如果 str 有值, 用这个值, 如果没有, 用默认的'YYYY-MM-DD--HH:mm:ss' */
         timeFormater(value, str='YYYY-MM-DD--HH:mm:ss'){
           return dayjs(value).format(str)
         },
